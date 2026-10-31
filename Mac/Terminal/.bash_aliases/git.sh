@@ -1,0 +1,14 @@
+alias gs='git status'                          # Show repository status.
+alias ga='git add'                             # Stage files.
+alias gaa='git add .'                          # Stage all changes in the current directory.
+alias gc='git commit'                          # Create a commit.
+alias gcm='git commit -m'                      # Commit with a message.
+alias gp='git push'                            # Push commits to the remote repository.
+alias gpl='git pull'                           # Pull the latest changes.
+alias gb='git branch'                          # List or manage branches.
+alias gco='git checkout'                       # Switch branches or restore files.
+alias gsw='git switch'                         # Switch branches (modern Git).
+alias gd='git diff'                            # Show unstaged changes.
+alias gl='git log --oneline --graph --decorate --all'  # Compact commit history graph.
+alias gst='git stash'                          # Stash uncommitted changes.
+alias gpop='git stash pop'                     # Restore the latest stash.

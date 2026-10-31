@@ -1,0 +1,10 @@
+alias meminfo='vm_stat && echo "--- Top Memory Processes ---" && ps aux -m | head -10'                        # Memory stats + top memory-consuming processes.
+alias cpuinfo='sysctl -n machdep.cpu.brand_string && echo "Cores: $(sysctl -n hw.ncpu)" && echo "--- Top CPU Processes ---" && ps aux -r | head -10'  # CPU model/core count + top CPU-consuming processes.
+alias disk='df -h'                                                                                            # Show disk usage in human-readable units.
+alias usage='du -sh ./*'                                                                                      # Display sizes of files and directories.
+alias ports='sudo lsof -nP -iTCP -sTCP:LISTEN'                                                                # List listening TCP ports with associated processes.
+alias myip='curl -s ifconfig.me'                                                                              # Show your public IP address.
+alias path='echo "$PATH" | tr ":" "\n"'                                                                       # Display PATH one directory per line.
+alias pingg='ping google.com'                                                                                 # Quick internet connectivity test.
+alias psg='ps aux | grep -i'                                                                                  # Search for running processes.
+alias now='date "+%F %T"'                                                                                     # Print the current date and time.

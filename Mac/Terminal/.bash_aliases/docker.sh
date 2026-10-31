@@ -1,0 +1,15 @@
+alias d='docker'                                                                      # Shorten the docker command.
+alias dps='docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"'            # Show running containers with the most useful columns.
+alias dpsa='docker ps -a --format "table {{.Names}}\t{{.Status}}\t{{.Image}}"'        # List all containers with their images.
+alias dimg='docker images --format "table {{.Repository}}\t{{.Tag}}\t{{.Size}}"'      # Display local images in a clean table.
+alias dlogs='docker logs -f --tail 100'                                               # Follow the last 100 log lines.
+alias dexec='docker exec -it'                                                         # Open an interactive shell in a container.
+alias dstats='docker stats'                                                           # Monitor live container resource usage.
+alias dinspect='docker inspect'                                                       # Display detailed container or image information.
+alias dnet='docker network ls'                                                        # List Docker networks.
+alias dvol='docker volume ls'                                                         # List Docker volumes.
+alias dcomp='docker compose'                                                          # Shorten Docker Compose commands.
+alias dup='docker compose up -d'                                                      # Start Compose services in detached mode.
+alias ddown='docker compose down'                                                     # Stop and remove Compose services.
+alias drestart='docker restart'                                                       # Restart one or more containers.
+alias dprune='docker system prune -f'                                                 # Remove unused containers, networks, images, and cache.
