@@ -75,7 +75,7 @@ No other parameters. Sign out and back in to see the changes everywhere.
 
 ## 04.Update-Windows.ps1 — recurring updates
 
-Installs pending Windows Update updates, triggers Microsoft Store app updates, and upgrades every app `winget` manages. (It runs the three update categories of `05.Secure-Windows.ps1`, so that script must be in the same folder.)
+Installs pending Windows Update updates, triggers Microsoft Store app updates, and upgrades every app `winget` manages. This script is standalone and does not require `05.Secure-Windows.ps1`.
 
 ```powershell
 .\04.Update-Windows.ps1 -Run      # install updates
@@ -187,12 +187,10 @@ $script = Join-Path $env:TEMP '02.Configure-Windows.ps1'
 Invoke-WebRequest 'https://raw.githubusercontent.com/zonal-coyote-9/configs-desktop/main/Windows/02.Configure-Windows.ps1' -OutFile $script
 & $script -Run
 
-# 04.Update-Windows.ps1 (downloads its required companion script too)
-$dir = Join-Path $env:TEMP 'configs-desktop-Windows'
-New-Item -ItemType Directory -Force $dir | Out-Null
-Invoke-WebRequest 'https://raw.githubusercontent.com/zonal-coyote-9/configs-desktop/main/Windows/04.Update-Windows.ps1' -OutFile (Join-Path $dir '04.Update-Windows.ps1')
-Invoke-WebRequest 'https://raw.githubusercontent.com/zonal-coyote-9/configs-desktop/main/Windows/05.Secure-Windows.ps1' -OutFile (Join-Path $dir '05.Secure-Windows.ps1')
-& (Join-Path $dir '04.Update-Windows.ps1') -Run
+# 04.Update-Windows.ps1
+$script = Join-Path $env:TEMP '04.Update-Windows.ps1'
+Invoke-WebRequest 'https://raw.githubusercontent.com/zonal-coyote-9/configs-desktop/main/Windows/04.Update-Windows.ps1' -OutFile $script
+& $script -Run
 
 # 05.Secure-Windows.ps1
 $script = Join-Path $env:TEMP '05.Secure-Windows.ps1'
@@ -210,4 +208,4 @@ Invoke-WebRequest 'https://raw.githubusercontent.com/zonal-coyote-9/configs-desk
 & $script -Run
 ```
 
-`04.Update-Windows.ps1` needs `05.Secure-Windows.ps1` beside it, which is why its example downloads both. `01.Setup-Windows.ps1` uses `-SkipPostInstallSteps` to skip machine-specific steps that depend on files and network locations outside this repository. `TermSetup.ps1` replaces the Windows Terminal settings folder; only run it after OneDrive is installed and syncing.
+`01.Setup-Windows.ps1` uses `-SkipPostInstallSteps` to skip machine-specific steps that depend on files and network locations outside this repository. `TermSetup.ps1` replaces the Windows Terminal settings folder; only run it after OneDrive is installed and syncing.
