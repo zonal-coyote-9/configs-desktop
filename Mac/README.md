@@ -177,3 +177,25 @@ Shell configuration installed by `02.Configure-Mac.py` — not run directly:
 | `.bash_aliases/` | Aliases grouped by topic: `base`, `cleanup`, `diagnostics`, `docker`, `git`, `safety` (`rm` asks before deleting, `cp`/`mv` before overwriting), and `unix` (modern tools like `eza`/`bat`, only used if installed). |
 | `Microsoft.PowerShell_profile.ps1` | PowerShell prompt showing date, last command's run time, user and folder. |
 | `PowerShell.terminal` | A Terminal.app profile named "PowerShell". |
+
+---
+
+## Run directly from GitHub
+
+These commands run the latest version from the `main` branch. Run only the command for the script you want. Review a script before running it; these scripts can change system settings and install software.
+
+```bash
+python3 -c 'import urllib.request; u="https://raw.githubusercontent.com/zonal-coyote-9/configs-desktop/main/Mac/01.Setup-Mac.py"; exec(compile(urllib.request.urlopen(u).read(), u, "exec"))' --run
+```
+
+`02.Configure-Mac.py` also installs files from the repository's `Terminal/` folder, so clone the repository to keep those companion files available:
+
+```bash
+repo="$(mktemp -d)" && git clone --depth 1 https://github.com/zonal-coyote-9/configs-desktop.git "$repo" && python3 "$repo/Mac/02.Configure-Mac.py" --run
+```
+
+```bash
+python3 -c 'import urllib.request; u="https://raw.githubusercontent.com/zonal-coyote-9/configs-desktop/main/Mac/04.Update-Mac.py"; exec(compile(urllib.request.urlopen(u).read(), u, "exec"))' --run
+python3 -c 'import urllib.request; u="https://raw.githubusercontent.com/zonal-coyote-9/configs-desktop/main/Mac/05.Secure-Mac.py"; exec(compile(urllib.request.urlopen(u).read(), u, "exec"))' --all --report
+python3 -c 'import urllib.request; u="https://raw.githubusercontent.com/zonal-coyote-9/configs-desktop/main/Mac/MacSystemInfo.py"; exec(compile(urllib.request.urlopen(u).read(), u, "exec"))' --run
+```

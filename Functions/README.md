@@ -139,3 +139,18 @@ Moves screenshots (png, jpg, jpeg, bmp) into `Year/Month` folders (e.g. `2026/09
 python3 group_screenshots.py                       # sorts ~/Pictures/Screenshots
 python3 group_screenshots.py ~/Desktop/Screens     # or any folder
 ```
+
+---
+
+## Run directly from GitHub
+
+These examples execute the latest script from the `main` branch without saving a copy. Run only the command for the script you want. Replace `python3` with `python` on Windows. Review the script before running it.
+
+```bash
+python3 -c 'import urllib.request; u="https://raw.githubusercontent.com/zonal-coyote-9/configs-desktop/main/Functions/generate_password.py"; exec(compile(urllib.request.urlopen(u).read(), u, "exec"))' --non-interactive
+python3 -c 'import urllib.request; u="https://raw.githubusercontent.com/zonal-coyote-9/configs-desktop/main/Functions/generate_username.py"; exec(compile(urllib.request.urlopen(u).read(), u, "exec"))' --non-interactive --count 5
+python3 -c 'import urllib.request; u="https://raw.githubusercontent.com/zonal-coyote-9/configs-desktop/main/Functions/convert_to_jpeg.py"; exec(compile(urllib.request.urlopen(u).read(), u, "exec"))' IMG_0001.HEIC
+python3 -c 'import urllib.request; u="https://raw.githubusercontent.com/zonal-coyote-9/configs-desktop/main/Functions/group_downloads.py"; exec(compile(urllib.request.urlopen(u).read(), u, "exec"))' ~
+python3 -c 'import urllib.request; u="https://raw.githubusercontent.com/zonal-coyote-9/configs-desktop/main/Functions/group_photos.py"; exec(compile(urllib.request.urlopen(u).read(), u, "exec"))' ~/Pictures/Unsorted ~/Pictures/Sorted
+python3 -c 'import urllib.request; u="https://raw.githubusercontent.com/zonal-coyote-9/configs-desktop/main/Functions/group_screenshots.py"; exec(compile(urllib.request.urlopen(u).read(), u, "exec"))' ~/Pictures/Screenshots
+```

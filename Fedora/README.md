@@ -147,3 +147,16 @@ sudo ./05.Secure-Fedora.sh --separate-admin --new-admin localadmin
 4. Only then removes your account from `wheel`. Any failed check stops before this point, leaving your account unchanged.
 
 Log out and back in afterwards — terminals already open keep sudo until you do. Options: `--new-admin NAME` (otherwise you're asked), `--demote-user NAME` (default: the user who ran sudo). To undo, run as the admin account: `sudo ./05.Secure-Fedora.sh --separate-admin --demote-user YOURNAME --restore-defaults`. The admin account is never deleted automatically.
+
+---
+
+## Run directly from GitHub
+
+These commands download the latest version from the `main` branch to `/tmp` and run it. Run only the command for the script you want. Review a script before running it; these scripts can change system settings and install software.
+
+```bash
+curl -fsSL -o /tmp/01.Setup-Fedora.sh https://raw.githubusercontent.com/zonal-coyote-9/configs-desktop/main/Fedora/01.Setup-Fedora.sh && bash /tmp/01.Setup-Fedora.sh --run
+curl -fsSL -o /tmp/02.Configure-Fedora.sh https://raw.githubusercontent.com/zonal-coyote-9/configs-desktop/main/Fedora/02.Configure-Fedora.sh && bash /tmp/02.Configure-Fedora.sh --run
+curl -fsSL -o /tmp/04.Update-Fedora.sh https://raw.githubusercontent.com/zonal-coyote-9/configs-desktop/main/Fedora/04.Update-Fedora.sh && bash /tmp/04.Update-Fedora.sh --run
+curl -fsSL -o /tmp/05.Secure-Fedora.sh https://raw.githubusercontent.com/zonal-coyote-9/configs-desktop/main/Fedora/05.Secure-Fedora.sh && sudo bash /tmp/05.Secure-Fedora.sh --all --report
+```

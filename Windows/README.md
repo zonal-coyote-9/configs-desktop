@@ -169,3 +169,45 @@ Windows Terminal and PowerShell configuration — not run directly:
 | `settings.json`, `state.json`, `elevated-state.json`, `Microsoft_logo_azure.png` | Windows Terminal settings and assets. |
 | `Microsoft.PowerShell_profile.ps1` | PowerShell prompt showing date, last command's run time, user and folder. It also loads tools from `C:\Tools` and `C:\CeiseData`, which only exist on the author's work machines — remove those lines before using it elsewhere. |
 | `MyFunctions.ps1` | `Get-ExternalIP` (shows your public IP address). It also tries to load function files from a `Functions\` folder that isn't part of this repo, so those lines fail unless you provide the files. |
+
+---
+
+## Run directly from GitHub
+
+Run these examples in PowerShell. They download the latest version from the `main` branch to your temporary folder and run it. Run only the command group for the script you want. Review a script before running it; several scripts make system changes and need an Administrator PowerShell.
+
+```powershell
+# 01.Setup-Windows.ps1
+$script = Join-Path $env:TEMP '01.Setup-Windows.ps1'
+Invoke-WebRequest 'https://raw.githubusercontent.com/zonal-coyote-9/configs-desktop/main/Windows/01.Setup-Windows.ps1' -OutFile $script
+& $script -Run -SkipPostInstallSteps
+
+# 02.Configure-Windows.ps1
+$script = Join-Path $env:TEMP '02.Configure-Windows.ps1'
+Invoke-WebRequest 'https://raw.githubusercontent.com/zonal-coyote-9/configs-desktop/main/Windows/02.Configure-Windows.ps1' -OutFile $script
+& $script -Run
+
+# 04.Update-Windows.ps1 (downloads its required companion script too)
+$dir = Join-Path $env:TEMP 'configs-desktop-Windows'
+New-Item -ItemType Directory -Force $dir | Out-Null
+Invoke-WebRequest 'https://raw.githubusercontent.com/zonal-coyote-9/configs-desktop/main/Windows/04.Update-Windows.ps1' -OutFile (Join-Path $dir '04.Update-Windows.ps1')
+Invoke-WebRequest 'https://raw.githubusercontent.com/zonal-coyote-9/configs-desktop/main/Windows/05.Secure-Windows.ps1' -OutFile (Join-Path $dir '05.Secure-Windows.ps1')
+& (Join-Path $dir '04.Update-Windows.ps1') -Run
+
+# 05.Secure-Windows.ps1
+$script = Join-Path $env:TEMP '05.Secure-Windows.ps1'
+Invoke-WebRequest 'https://raw.githubusercontent.com/zonal-coyote-9/configs-desktop/main/Windows/05.Secure-Windows.ps1' -OutFile $script
+& $script -All -Report
+
+# New-EdgeProfile.ps1
+$script = Join-Path $env:TEMP 'New-EdgeProfile.ps1'
+Invoke-WebRequest 'https://raw.githubusercontent.com/zonal-coyote-9/configs-desktop/main/Windows/New-EdgeProfile.ps1' -OutFile $script
+& $script -Run
+
+# Terminal/TermSetup.ps1 (replaces the Terminal settings folder)
+$script = Join-Path $env:TEMP 'TermSetup.ps1'
+Invoke-WebRequest 'https://raw.githubusercontent.com/zonal-coyote-9/configs-desktop/main/Windows/Terminal/TermSetup.ps1' -OutFile $script
+& $script -Run
+```
+
+`04.Update-Windows.ps1` needs `05.Secure-Windows.ps1` beside it, which is why its example downloads both. `01.Setup-Windows.ps1` uses `-SkipPostInstallSteps` to skip machine-specific steps that depend on files and network locations outside this repository. `TermSetup.ps1` replaces the Windows Terminal settings folder; only run it after OneDrive is installed and syncing.
